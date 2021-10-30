@@ -14,6 +14,7 @@
     "@types/typescript": "^2.0.0",
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "3.3.0",
+    "dotenv": "^10.0.0",
     "husky": "^7.0.4",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.4.4"
