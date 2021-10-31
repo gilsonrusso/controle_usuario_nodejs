@@ -1,5 +1,6 @@
+import { hash } from "bcrypt";
 import { Request, Response } from "express";
-import { getCustomRepository } from "typeorm";
+import { getCustomRepository, UsingJoinTableIsNotAllowedError } from "typeorm";
 import { UserRepository } from "../repositories/UserRepository";
 
 class UserController {
@@ -14,13 +15,17 @@ class UserController {
       return response.status(400).json({ message: "User Already Exists!" });
     }
 
+    const passwordHasshed = await hash(password, 8)
+
     const user = userRepository.create({
       name,
       username,
-      password,
+      password: passwordHasshed
     });
 
     await userRepository.save(user);
+
+    Reflect.deleteProperty(user, 'password')
 
     return response.status(201).json(user);
   }
