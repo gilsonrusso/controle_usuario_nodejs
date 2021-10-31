@@ -1,10 +1,11 @@
 require('dotenv').config()
 import express from "express";
+import { router } from "./routes";
+import "reflect-metadata"
+import "./database";
 
 const app = express();
-
-app.get("/", (request, response) => {
-  return response.status(200).send();
-});
+app.use(express.json())
+app.use(router)
 
 export { app };
